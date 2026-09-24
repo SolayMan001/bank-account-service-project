@@ -44,6 +44,18 @@ public class BankAccount {
         createdAt = new Date();
     }
 
+    public void updateDetails(Double balance, String currency, AccountType type) {
+        if (balance != null) {
+            setBalance(balance);
+        }
+        if (currency != null) {
+            setCurrency(currency);
+        }
+        if (type != null) {
+            setType(type);
+        }
+    }
+
     public String getId() {
         return id;
     }
