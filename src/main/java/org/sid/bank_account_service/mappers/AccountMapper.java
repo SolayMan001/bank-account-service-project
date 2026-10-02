@@ -18,7 +18,8 @@ public class AccountMapper {
                 account.getCreatedAt(),
                 account.getBalance(),
                 account.getCurrency(),
-                account.getType()
+                account.getType(),
+                account.getCustomer()
         );
     }
 }

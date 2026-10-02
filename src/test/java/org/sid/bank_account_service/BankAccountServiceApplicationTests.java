@@ -6,6 +6,7 @@ import org.sid.bank_account_service.enums.AccountType;
 import org.sid.bank_account_service.repositories.BankAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -16,11 +17,13 @@ class BankAccountServiceApplicationTests {
     private BankAccountRepository bankAccounts;
 
     @Test
+    @Transactional
     void initializesSampleAccountsInH2() {
         assertThat(bankAccounts.findAll()).hasSize(3)
                 .allSatisfy(account -> {
                     assertThat(account.getId()).isNotBlank();
                     assertThat(account.getCreatedAt()).isNotNull();
+                    assertThat(account.getCustomer().getBankAccounts()).contains(account);
                 })
                 .extracting(BankAccount::getType)
                 .containsExactlyInAnyOrder(

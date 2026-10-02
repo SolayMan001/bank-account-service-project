@@ -8,6 +8,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
 import org.sid.bank_account_service.enums.AccountType;
 
@@ -29,6 +30,9 @@ public class BankAccount {
 
     @Enumerated(EnumType.STRING)
     private AccountType type;
+
+    @ManyToOne
+    private Customer customer;
 
     protected BankAccount() {
     }
@@ -87,5 +91,13 @@ public class BankAccount {
 
     public void setType(AccountType type) {
         this.type = type;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 }
